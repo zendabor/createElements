@@ -185,6 +185,14 @@ body {
     border: 2px solid var(--default-border-color);
 }
 
+.dark {
+    border: 1px solid #fff;
+}
+
+.dark__text {
+    color: #fff;
+}
+
 .error-message-block {
     position: absolute;
     left: 0;

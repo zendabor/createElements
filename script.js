@@ -28,6 +28,29 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+let theme = 'white';
+document.addEventListener('keyup', (e) => {
+    const { key } = e;
+    if (key === 'Tab' && theme === 'white') {
+        document.querySelector('body').style.background = '#24292E';
+        document.querySelectorAll('.task-item__text').forEach((item) => {
+            item.classList.add('dark__text');
+        });
+        document.querySelectorAll('button').forEach((item) => {
+            item.classList.add('dark');
+        });
+        theme = 'dark';
+    } else if (key === 'Tab' && theme === 'dark') {
+        document.querySelector('body').style.background = 'initial';
+        document.querySelectorAll('.task-item__text').forEach((item) => {
+            item.classList.remove('dark__text');
+        });
+        document.querySelectorAll('button').forEach((item) => {
+            item.classList.remove('dark');
+        });
+        theme = 'white';
+    }
+})
 
 const tasks = [
     { id: 1, completed: false, text: 'Посмотреть новый урок по JavaScript' },
@@ -59,6 +82,8 @@ formBlock.addEventListener('submit', (e) => {
     }
 })
 
+
+
 function doSomething() {
     document.querySelectorAll('.task-item').forEach((item) => {
         item.remove();
@@ -88,10 +113,16 @@ function doSomething() {
         //cоздание спана с текстом
         const spanText = document.createElement('span');
         spanText.className = 'task-item__text';
+        if (theme === 'dark') {
+            spanText.className = 'task-item__text dark__text';
+        }
         spanText.textContent = item.text;
         //кнопка 
         const btn = document.createElement('button');
         btn.className = 'task-item__delete-button default-button delete-button';
+        if (theme === 'dark') {
+            btn.className = 'task-item__delete-button default-button delete-button dark';
+        }
         btn.deleteTaskId = item.id;
         btn.textContent = 'Удалить';
         //добавление вложенности
@@ -120,29 +151,7 @@ taskList.addEventListener('click', (e) => {
     }
 })
 
-let theme = 'white';
-document.addEventListener('keyup', (e) => {
-    const { key } = e;
-    if (key === 'Tab' && theme === 'white') {
-        document.querySelector('body').style.background = '#24292E';
-        document.querySelectorAll('.task-item').forEach((item) => {
-            item.style.color = '#fff';
-        });
-        document.querySelectorAll('button').forEach((item) => {
-            item.style.border = '1px solid #fff';
-        });
-        theme = 'dark';
-    } else if (key === 'Tab' && theme === 'dark') {
-        document.querySelector('body').style.background = 'initial';
-        document.querySelectorAll('.task-item').forEach((item) => {
-            item.style.color = 'initial';
-        });
-        document.querySelectorAll('button').forEach((item) => {
-            item.style.border = 'none';
-        });
-        theme = 'white';
-    }
-})
+
 
 /// создание модального окна
 const modal = document.createElement('div');
